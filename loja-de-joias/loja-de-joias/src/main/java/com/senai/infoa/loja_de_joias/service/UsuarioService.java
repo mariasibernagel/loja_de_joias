@@ -1,12 +1,10 @@
 package com.senai.infoa.loja_de_joias.service;
 
 import com.senai.infoa.loja_de_joias.Repositories.UsuarioRepository;
-
+import com.senai.infoa.loja_de_joias.models.Usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.senai.infoa.loja_de_joias.Models.usuario;
 
 @Service
 
@@ -20,7 +18,7 @@ public class UsuarioService {
         
     }
 
-    public usuario salvar (usuario  usuario){
+    public Usuario salvar (Usuario  usuario, String  confSenha){
         return  usuarioRepository.save(usuario);
     }
 
