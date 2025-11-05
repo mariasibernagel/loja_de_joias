@@ -1,7 +1,7 @@
 package com.senai.infoa.loja_de_joias.service;
 
 import com.senai.infoa.loja_de_joias.Repositories.UsuarioRepository;
-import com.senai.infoa.loja_de_joias.models.Usuario;
+import com.senai.infoa.loja_de_joias.Models.Usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,3 +23,4 @@ public class UsuarioService {
     }
 
 }
+
