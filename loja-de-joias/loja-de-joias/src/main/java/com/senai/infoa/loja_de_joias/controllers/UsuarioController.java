@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.senai.infoa.loja_de_joias.models.Usuario;
+import com.senai.infoa.loja_de_joias.Models.Usuario;
 import com.senai.infoa.loja_de_joias.service.UsuarioService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -37,5 +37,6 @@ public class UsuarioController {
     
     
 }
+
 
 
