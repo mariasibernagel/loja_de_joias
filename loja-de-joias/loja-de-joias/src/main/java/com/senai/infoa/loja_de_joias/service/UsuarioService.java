@@ -10,17 +10,25 @@ import org.springframework.stereotype.Service;
 
 public class UsuarioService {
 
-      @Autowired
+    @Autowired
     private UsuarioRepository usuarioRepository;
-    
-    public Long contador() {
-        return  usuarioRepository.count();
-        
+
+    public Usuario salvar(Usuario usuario, String senha, String confSenha) {
+        if (senha.equals(confSenha)) {
+            return usuarioRepository.save(usuario);
+        }
+        return null;
     }
 
-    public Usuario salvar (Usuario  usuario, String  confSenha){
-        return  usuarioRepository.save(usuario);
+    public String login(String email, String senha) {
+        Usuario usuario = usuarioRepository.findByUsuario(email, senha);
+        if (usuario != null && senha.equals(usuario.getSenha())) {
+            return "Login efetuado com sucesso!";
+        }
+        return "Falha ao realizar o login";
     }
+}
 
 }
+
 
