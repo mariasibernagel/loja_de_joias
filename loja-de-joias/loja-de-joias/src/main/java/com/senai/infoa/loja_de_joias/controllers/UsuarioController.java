@@ -21,22 +21,18 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping("/count")
-    public Long contador() {
-        return usuarioService.contador();
+    @PostMapping("/cadastrar")
+    public Usuario salvar(@RequestBody Usuario usuario, @RequestParam String senha, @RequestParam String confSenha) {
+        return usuarioService.salvar(usuario, senha, confSenha);
     }
 
-    @PostMapping("salvar")
-    public Usuario salvar(@RequestBody Usuario usuario, @RequestParam String confSenha ) {
-        if (usuario.getSenha().equals(confSenha)){
-            return usuarioService.salvar(usuario, confSenha);
-        } else{
-            return null;
-        }
+    @PostMapping("/login")
+    public String login(@RequestParam String email, @RequestParam String senha) {
+        return usuarioService.login(email, senha);
     }
     
-    
 }
+
 
 
 
