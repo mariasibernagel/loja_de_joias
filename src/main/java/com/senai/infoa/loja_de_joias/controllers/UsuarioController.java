@@ -1,12 +1,20 @@
 package com.senai.infoa.loja_de_joias.controllers;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import com.senai.infoa.loja_de_joias.Models.Usuario;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import com.senai.infoa.loja_de_joias.models.Endereco;
+import com.senai.infoa.loja_de_joias.models.Usuario;
 import com.senai.infoa.loja_de_joias.service.UsuarioService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -19,12 +27,39 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @PostMapping("/cadastrar")
-    public Usuario salvar(@RequestBody Usuario usuario, @RequestParam String senha, @RequestParam String confSenha) {
-        return usuarioService.salvar(usuario, senha, confSenha);
+    public ResponseEntity<?> cadastrar(@RequestBody Usuario usuario) {
+        try {
+            Usuario salvo = usuarioService.salvar(usuario);
+            return ResponseEntity.ok(salvo);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody Usuario usuario) {
+        String resultado = usuarioService.login(usuario.getEmail(), usuario.getSenha());
+        if (resultado.contains("sucesso")) {
+            return ResponseEntity.ok(resultado);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(resultado);
+        }
     }
 
-    @PostMapping("/login")
-    public String login(@RequestParam String email, @RequestParam String senha) {
-        return usuarioService.login(email, senha);
+    @PutMapping("/atualizar/{id}")
+    public Usuario atualizar(@PathVariable Integer id, @RequestBody Usuario usuario) {
+        return usuarioService.atualizar(id, usuario);
     }
+
+    @GetMapping("/buscarusuario/{id}")
+    public Endereco buscarPorId(@PathVariable Integer id) {
+        return usuarioService.buscarPorId(id);
+    }
+
+    @GetMapping("/listar")
+    public List<Endereco> listarTodos() {
+        return enderecoService.listarTodos();
+    }
+
+
 }
