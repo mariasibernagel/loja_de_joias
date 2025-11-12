@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.senai.infoa.loja_de_joias.models.Endereco;
 import com.senai.infoa.loja_de_joias.models.Usuario;
 import com.senai.infoa.loja_de_joias.service.UsuarioService;
 
@@ -52,13 +51,13 @@ public class UsuarioController {
     }
 
     @GetMapping("/buscarusuario/{id}")
-    public Endereco buscarPorId(@PathVariable Integer id) {
+    public Usuario buscarPorId(@PathVariable Integer id) {
         return usuarioService.buscarPorId(id);
     }
 
     @GetMapping("/listar")
-    public List<Endereco> listarTodos() {
-        return enderecoService.listarTodos();
+    public List<Usuario> listarTodos() {
+        return usuarioService.listarTodos();
     }
 
 

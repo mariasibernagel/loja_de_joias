@@ -3,6 +3,8 @@ package com.senai.infoa.loja_de_joias.service;
 import com.senai.infoa.loja_de_joias.models.Usuario;
 import com.senai.infoa.loja_de_joias.repositories.UsuarioRepository;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +45,10 @@ public class UsuarioService {
         usuarioExistente.setEndereco(usuarioAtualizado.getEndereco());
 
         return usuarioRepository.save(usuarioExistente);
+    }
+
+    public List<Usuario> listarTodos() {
+        return usuarioRepository.findAll();
     }
 
     public Usuario buscarPorId(Integer id) {
